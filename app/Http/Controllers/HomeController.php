@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\invoices;
+use App\Models\School;
+use App\Models\Student;
+
 class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
      *
      * @return void
-     */
+    */
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,10 +21,12 @@ class HomeController extends Controller
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
-     */
+    */
     public function index()
     {
-        return view('home');
+        $schools = School::all();
+        $students = Student::all();
+        return view('home', compact('schools', 'students'));
     }
 
 

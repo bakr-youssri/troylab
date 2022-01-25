@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+    protected $guarded=[];
+    protected $hidden=['created_at','updated_at'];
+
+    //Relation
+    public function school()
+    {
+        return $this->belongsTo(School::class, 'school_id');
+    }
 }

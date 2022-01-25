@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\BaseCrudRepositoryInterface;
+use App\Http\Requests\SchoolRequest;
 use App\Models\School;
-use Illuminate\Http\Request;
+
 
 class SchoolController extends Controller
 {
+    protected $school;
+    public function __construct(BaseCrudRepositoryInterface $school)
+    {
+        $this->school = $school;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        //
+        $schools = School::all();
+        return view('schools.list', compact('schools'));
     }
 
     /**
@@ -33,7 +41,7 @@ class SchoolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolRequest $request)
     {
         //
     }
@@ -67,7 +75,7 @@ class SchoolController extends Controller
      * @param  \App\Models\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, School $school)
+    public function update(SchoolRequest $request, School $school)
     {
         //
     }
@@ -80,6 +88,6 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        //
+        dd($school);
     }
 }

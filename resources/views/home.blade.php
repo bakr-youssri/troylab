@@ -29,18 +29,16 @@
         <div class="col-md-6 col-xm-12">
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-                    <div class="">
-                        <h6 class="mb-3 tx-12 text-white">أجمالي المدارس</h6>
-                    </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
                                 <h4 class="tx-20 font-weight-bold mb-1 text-white">
+                                    أجمالي المدارس
                                 </h4>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
-                                <span class="text-white op-7">100</span>
+                                <span class="text-white op-7">{{$schools->count()}}</span>
                             </span>
                         </div>
                     </div>
@@ -51,21 +49,16 @@
         <div class="col-md-6 col-xm-12">
             <div class="card overflow-hidden sales-card bg-danger-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-                    <div class="">
-                        <h6 class="mb-3 tx-12 text-white">أجمالي الطلاب</h6>
-                    </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h3 class="tx-20 font-weight-bold mb-1 text-white">
-
-                                    
-                                </h3>
-                                
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">
+                                    أجمالي الطلاب
+                                </h4>
                             </div>
                             <span class="float-right my-auto mr-auto">
                                 <i class="fas fa-arrow-circle-up text-white"></i>
-                                <span class="text-white op-7">100</span>
+                                <span class="text-white op-7">{{$students->count()}}</span>
                             </span>
                         </div>
                     </div>
@@ -87,10 +80,6 @@
     <script src="{{ URL::asset('assets/plugins/jquery.flot/jquery.flot.resize.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/jquery.flot/jquery.flot.categories.js') }}"></script>
     <script src="{{ URL::asset('assets/js/dashboard.sampledata.js') }}"></script>
-    <!-- Internal Map -->
-    <script src="{{ URL::asset('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/modal-popup.js') }}"></script>
     <!--Internal  index js -->
     <script src="{{ URL::asset('assets/js/index.js') }}"></script>
     <script src="{{ URL::asset('assets/js/jquery.vmap.sampledata.js') }}"></script>

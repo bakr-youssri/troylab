@@ -21,10 +21,20 @@
         <ul class="side-menu">
             <li class="side-item side-item-category">الرئيسية</li>
             <li class="slide">
-                <a class="side-menu__item" href="{{ url('/' . ($page = 'home')) }}"><span class="side-menu__label">الرئيسية</span></a>
+                <a class="side-menu__item" href="/">
+                    <span class="side-menu__label"> <i class="ti-settings ml-3"></i> الرئيسية</span>
+                </a>
             </li>
-            <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">المدارس</a></li>
-            <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">الطلاب</a></li>
+            <li class="slide">
+                <a class="side-menu__item" href="{{Route('schools.index')}}">
+                    <span class="side-menu__label"><i class="ti-home ml-3"></i> المدارس</span>
+                </a>
+            </li>
+            <li class="slide">
+                <a class="side-menu__item" href="{{Route('students.index')}}">
+                    <span class="side-menu__label"><i class="ti-user ml-3"></i> الطلاب</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
