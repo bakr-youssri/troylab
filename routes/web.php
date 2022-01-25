@@ -22,5 +22,9 @@ Route::get('/register',[App\Http\Controllers\AuthController::class, 'register'])
 Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-    
+    Route::Resource('schools', App\Http\Controllers\SchoolController::class);
+
+    Route::get('/getHead',function(){
+        return view('table-basic');
+    });
 });
