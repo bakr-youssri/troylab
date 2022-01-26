@@ -29,6 +29,7 @@ class StudentRequest extends FormRequest
             'name'=>['required', 'min:3', 'max:150'],
             'email'=>['required',new EmailRule(),'unique:students,email,except'.$this->student? $this->id:''],
             'mob'=>['required', new MobileNumberRule(),'unique:students,mob,except'.$this->student? $this->id:''],
+            'school_id'=>['required', 'exists:schools,id'],
             'enabled'=>['nullable', 'in:0,1']
         ];
     }

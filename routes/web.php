@@ -19,7 +19,8 @@ Route::get('/',[App\Http\Controllers\AuthController::class, 'login']);
 Route::get('/register',[App\Http\Controllers\AuthController::class, 'register']);
 
 /*==================Auth==================*/
-Route::group(['middleware' => 'auth'], function (){
+
+Route::group(['middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],'prefix' => LaravelLocalization::setLocale()], function (){
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
     Route::Resource('schools', App\Http\Controllers\SchoolController::class);
     Route::Resource('students', App\Http\Controllers\StudentController::class);

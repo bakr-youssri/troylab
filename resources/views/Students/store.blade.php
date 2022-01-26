@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
 @endsection
 @section('title')
-    {{__('translate.students.edit_student')}}
+    {{__('translate.students.add_student')}}
 @stop
 
 @section('page-header')
@@ -20,7 +20,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{__("translate.students.edit_student")}}</span>
+                <h4 class="content-title mb-0 my-auto">{{__("translate.students.add_student")}}</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -28,7 +28,7 @@
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item"><a href="/">{{__("translate.general.main")}}</a></li>
                     <li class="breadcrumb-item"><a href="{{Route('students.index')}}">{{__("translate.students.students")}}</a></li>
-                    <li class="breadcrumb-item active">{{__("translate.students.edit_student")}}</li>
+                    <li class="breadcrumb-item active">{{__("translate.students.add_student")}}</li>
                 </ol>
             </nav>						
         </div>
@@ -41,35 +41,32 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{Route('students.update', $student->id)}}" method="post">
+                    <form action="{{Route('students.store')}}" method="post">
                         @csrf
-                        @method('PATCH')
                         {{-- 1 --}}
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">{{__('translate.general.name')}}</label>
-                                <input type="text" class="form-control" id="inputName" name="name" value="{{$student->name}}" required>
+                                <input type="text" class="form-control" id="inputName" name="name" required>
                             </div>
 
                             <div class="col">
                                 <label>{{__('translate.general.email')}}</label>
-                                <input class="form-control" name="email" id="inputName" type="text" value="{{$student->email}}" required>
+                                <input class="form-control" name="email" id="inputName" type="text" required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">{{__('translate.general.phone')}}</label>
-                                <input type="text" class="form-control" id="inputName" name="mob" value="{{$student->mob}}">
+                                <input type="text" class="form-control" id="inputName" name="mob">
                             </div>
                             <div class="col">
                                 <label for="inputName" class="control-label">{{__('translate.schools.schools')}}</label>
                                 <select class="form-control select2" name="school_id">
-                                    <option value="{{$student->school->id}}">{{$student->school->name}}</option>
+                                    <option label="{{__('translate.general.choose')}}"></option>
                                     @foreach ($schools as $school)
-                                    @if ($student->school->id !== $school->id)
                                     <option value="{{$school->id}}">{{$school->name}}</option>
-                                    @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -77,13 +74,13 @@
                         
                         <div class="row">
                             <div class="form-check col" style="padding-top:20px">
-                                <input type="checkbox" class="form-check-input" name="enabled" id="exampleCheck1" value="1" {{$student->enabled == 1 ? 'Checked': ''}}>
+                                <input type="checkbox" class="form-check-input" name="enabled" id="exampleCheck1" value="1">
                                 <label class="form-check-label ml-3 mr-3" for="exampleCheck1">{{__('translate.general.active')}}</label>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary mt-3">{{__('translate.students.edit_student')}}</button>
+                            <button type="submit" class="btn btn-primary mt-3">{{__('translate.students.add_student')}}</button>
                         </div>
                     </form>
                 </div>

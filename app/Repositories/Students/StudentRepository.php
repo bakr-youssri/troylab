@@ -4,7 +4,6 @@ namespace App\Repositories\Students;
 
 use App\Models\Student;
 use App\Repositories\BaseCrudRepositoryInterface;
-use Throwable;
 
 class StudentRepository implements BaseCrudRepositoryInterface
 {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Repositories\BaseCrudRepositoryInterface;
 use App\Http\Requests\StudentRequest;
+use App\Models\School;
 use App\Models\Student;
+use Facade\FlareClient\Http\Response;
 use Throwable;
 
 class StudentController extends Controller
@@ -24,8 +26,6 @@ class StudentController extends Controller
     {
         $students = Student::all();
         return view('Students.list', compact('students'));
-
-        //return view('form-elements');
     }
 
     /**
@@ -35,7 +35,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        $schools = School::all();
+        return view('Students.store', compact('schools'));
     }
 
     /**
@@ -46,7 +47,13 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        return $this->student->store($request->validated());
+        try{
+            $this->student->store($request->validated());
+            toastr()->success(__('translate.general.success_create'));
+            return redirect('/students');
+        }catch(Throwable $e){
+            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+        }
     }
 
     /**
@@ -57,7 +64,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('Students.show', compact('student'));
     }
 
     /**
@@ -68,7 +75,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('Students.edit', compact('student'));
+        $schools = School::all();
+        return view('Students.edit', compact('student', 'schools'));
     }
 
     /**
@@ -82,7 +90,7 @@ class StudentController extends Controller
     {
         try{
             $this->student->update($request->validated(), $student);
-            toastr()->success('Student has been updated successfully');
+            toastr()->success(__('translate.general.success_update'));
             return redirect('/students');
         }catch(Throwable $e){
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
@@ -97,6 +105,11 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        try{
+            $student->delete();
+            return Response()->json(['status'=>'success','message'=>__('translate.general.success_deleta')]);
+        }catch(Throwable $e){
+            return Response()->json(['status'=>'error','message'=>$e->getMessage()]);
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\BaseCrudRepositoryInterface;
 use App\Http\Requests\SchoolRequest;
 use App\Models\School;
-
+use Throwable;
 
 class SchoolController extends Controller
 {
@@ -32,7 +32,7 @@ class SchoolController extends Controller
      */
     public function create()
     {
-        //
+        return view('Schools.store');
     }
 
     /**
@@ -43,7 +43,13 @@ class SchoolController extends Controller
      */
     public function store(SchoolRequest $request)
     {
-        //
+        try{
+            $this->school->store($request->validated());
+            toastr()->success(__('translate.general.success_create'));
+            return redirect('/schools');
+        }catch(Throwable $e){
+            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+        }
     }
 
     /**
@@ -54,7 +60,7 @@ class SchoolController extends Controller
      */
     public function show(School $school)
     {
-        //
+        return view('Schools.show', compact('school'));
     }
 
     /**
@@ -65,7 +71,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        //
+        return view('Schools.edit', compact('school'));
     }
 
     /**
@@ -77,7 +83,13 @@ class SchoolController extends Controller
      */
     public function update(SchoolRequest $request, School $school)
     {
-        //
+        try{
+            $this->school->update($request->validated(), $school);
+            toastr()->success(__('translate.general.success_update'));
+            return redirect('/schools');
+        }catch(Throwable $e){
+            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+        }
     }
 
     /**
@@ -88,6 +100,11 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        dd($school);
+        try{
+            $school->delete();
+            return Response()->json(['status'=>'success','message'=>__('translate.general.success_deleta')]);
+        }catch(Throwable $e){
+            return Response()->json(['status'=>'error','message'=>$e->getMessage()]);
+        }
     }
 }

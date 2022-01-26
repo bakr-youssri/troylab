@@ -20,7 +20,8 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->when(SchoolController::class)->needs(BaseCrudRepositoryInterface::class)->give(SchoolRepository::class);
         $this->app->when(StudentController::class)->needs(BaseCrudRepositoryInterface::class)->give(StudentRepository::class);
-
+        
+        //$this->app->bind(StudentRepositoryInterface::class , StudentRepository::class);
     }
 
     /**

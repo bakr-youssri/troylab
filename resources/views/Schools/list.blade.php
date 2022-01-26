@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-	Schools
+{{__('translate.schools.schools')}}
 @endsection
 @section('css')
 <!-- Internal Data table css -->
@@ -16,16 +16,16 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Schools</span>
+							<h4 class="content-title mb-0 my-auto">{{__('translate.schools.schools')}}</span>
 						</div>
 					</div>
 					<div class="d-flex my-xl-auto right-content">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb breadcrumb-style1">
 								<li class="breadcrumb-item">
-									<a href="/">Home</a>
+									<a href="/">{{__('translate.general.main')}}</a>
 								</li>
-								<li class="breadcrumb-item active">Schools</li>
+								<li class="breadcrumb-item active">{{__('translate.schools.schools')}}</li>
 							</ol>
 						</nav>						
 					</div>
@@ -37,15 +37,14 @@
 					<div class="modal-dialog" role="document">
 						<div class="modal-content modal-content-demo">
 							<div class="modal-header">
-								<h6 class="modal-title">Basic Modal</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+								<h6 class="modal-title">{{__('translate.schools.delete_school')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
 							</div>
 							<div class="modal-body">
-								<h6>Modal Body</h6>
-								<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+								<h6>{{__('translate.general.delete_sure')}}</h6>
 							</div>
 							<div class="modal-footer">
-								<button class="btn ripple btn-primary" type="button">Save changes</button>
-								<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
+								<button class="btn ripple btn-danger deleteSchool" type="button">{{__('translate.schools.delete_school')}}</button>
+								<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">{{__('translate.general.cancle')}}</button>
 							</div>
 						</div>
 					</div>
@@ -54,39 +53,45 @@
 				<div class="row row-sm">
 					<div class="col-xl-12">
 						<div class="card">
+							<div class="card-header pb-0">
+								<div class="d-flex justify-content-between">
+									<div></div>
+									<a class="btn btn-info mb-3" href="{{Route('schools.create')}}">{{__('translate.schools.add_school')}}</a>
+								</div>
+							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table text-md-nowrap" id="example1">
 										<thead>
 											<tr class="text-center">
 												<th class="wd-5p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">Name</th>
-												<th class="wd-10p border-bottom-0">Students</th>
-												<th class="wd-10p border-bottom-0">Status</th>
-												<th class="wd-25p border-bottom-0">Action</th>
+												<th class="wd-15p border-bottom-0">{{__('translate.general.name')}}</th>
+												<th class="wd-10p border-bottom-0">{{__('translate.students.students')}}</th>
+												<th class="wd-10p border-bottom-0">{{__('translate.general.status')}}</th>
+												<th class="wd-25p border-bottom-0">{{__('translate.general.action')}}</th>
 											</tr>
 										</thead>
 										<tbody>
 											@foreach($schools as $index=>$school)
-											<tr class="text-center">
+											<tr class="text-center row{{$school->id}}">
 												<td>{{$index+1}}</td>
 												<td>{{$school->name}}</td>
 												<td>{{$school->student->count()}}
 												<td>
 													@if($school->enabled == 1)
-													<label class="badge badge-success">Active</label>
+													<label class="badge badge-success">{{__('translate.general.active')}}</label>
 													@else
-													<label class="badge badge-danger">Inactive</label>
+													<label class="badge badge-danger">{{__('translate.general.inactive')}}</label>
 													@endif
 												</td>
 												<td>
-													<a href="#" class="btn btn-sm btn-primary">
+													<a href="{{Route('schools.show', $school->id)}}" class="btn btn-sm btn-primary">
 														<i class="las la-search"></i>
 													</a>
-													<a href="#" class="btn btn-sm btn-info">
+													<a href="{{Route('schools.edit', $school->id)}}" class="btn btn-sm btn-info">
 														<i class="las la-pen"></i>
 													</a>
-													<a data-target="#modaldemo1" data-toggle="modal" href="#" class="btn btn-sm btn-danger">
+													<a data-target="#modaldemo1" data-toggle="modal" class="btn btn-sm btn-danger trash" data-trash="{{$school->id}}">
 														<i class="las la-trash"></i>
 													</a>
 												</td>
@@ -126,4 +131,37 @@
 <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
+<script>
+	$(document).ready(function() {
+		$('.trash').click(function(){
+			$('.deleteSchool').val($(this).attr('data-trash'));
+		});
+		$('.deleteSchool').on('click', function() {
+			var school_id = $(this).val();
+			if (school_id) {
+				$.ajax({
+					url: "schools/" + school_id,
+					type: "Delete",
+					data:{
+						'_token':"{{csrf_token()}}",
+						'id':school_id
+					},
+					success: function(data) {
+						$('#modaldemo1').modal('hide');
+						if(data.status == 'success'){
+							$('.row'+school_id).remove();
+							toastr.error(data.message);
+						}else{
+							toastr.error(data.message);
+						}
+					},
+				});
+			} else {
+				console.log('AJAX load did not work');
+			}
+		});
+
+	});
+
+</script>
 @endsection

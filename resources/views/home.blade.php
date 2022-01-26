@@ -13,8 +13,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-                <p class="mg-b-0">Sales monitoring dashboard template.</p>
+                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">{{__('translate.general.welcome')}}</h2>
             </div>
         </div>
         <div class="main-dashboard-header-right">
@@ -33,7 +32,7 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class="tx-20 font-weight-bold mb-1 text-white">
-                                    أجمالي المدارس
+                                    {{__('translate.schools.total_schools')}}
                                 </h4>
                             </div>
                             <span class="float-right my-auto mr-auto">
@@ -53,7 +52,7 @@
                         <div class="d-flex">
                             <div class="">
                                 <h4 class="tx-20 font-weight-bold mb-1 text-white">
-                                    أجمالي الطلاب
+                                    {{__('translate.students.total_students')}}
                                 </h4>
                             </div>
                             <span class="float-right my-auto mr-auto">

@@ -16,14 +16,14 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Students</span>
+							<h4 class="content-title mb-0 my-auto">{{__('translate.students.students')}}</span>
 						</div>
 					</div>
 					<div class="d-flex my-xl-auto right-content">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb breadcrumb-style1">
-								<li class="breadcrumb-item"><a href="/">Home</a></li>
-								<li class="breadcrumb-item active">Students</li>
+								<li class="breadcrumb-item"><a href="/">{{__('translate.general.main')}}</a></li>
+								<li class="breadcrumb-item active">{{__('translate.students.students')}}</li>
 							</ol>
 						</nav>						
 					</div>
@@ -35,15 +35,14 @@
 					<div class="modal-dialog" role="document">
 						<div class="modal-content modal-content-demo">
 							<div class="modal-header">
-								<h6 class="modal-title">Basic Modal</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+								<h6 class="modal-title">{{__('translate.students.delete_student')}}</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
 							</div>
 							<div class="modal-body">
-								<h6>Modal Body</h6>
-								<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+								<h6>{{__('translate.general.delete_sure')}}</h6>
 							</div>
 							<div class="modal-footer">
-								<button class="btn ripple btn-primary" type="button">Save changes</button>
-								<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
+								<button class="btn ripple btn-danger deleteStudent" type="button">{{__('translate.students.delete_student')}}</button>
+								<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">{{__('translate.general.cancle')}}</button>
 							</div>
 						</div>
 					</div>
@@ -52,43 +51,49 @@
 				<div class="row row-sm">
 					<div class="col-xl-12">
 						<div class="card">
+							<div class="card-header pb-0">
+								<div class="d-flex justify-content-between">
+									<div></div>
+									<a class="btn btn-info mb-3" href="{{Route('students.create')}}">{{__('translate.students.add_student')}}</a>
+								</div>
+							</div>
 							<div class="card-body">
 								<div class="table-responsive">
 									<table class="table text-md-nowrap" id="example1">
 										<thead>
 											<tr class="text-center">
 												<th class="wd-5p border-bottom-0">#</th>
-												<th class="wd-15p border-bottom-0">Name</th>
-												<th class="wd-20p border-bottom-0">Email</th>
-												<th class="wd-15p border-bottom-0">Phone</th>
-												<th class="wd-10p border-bottom-0">Status</th>
-												<th class="wd-15p border-bottom-0">School</th>
-												<th class="wd-25p border-bottom-0">Action</th>
+												<th class="wd-15p border-bottom-0">{{__('translate.general.name')}}</th>
+												<th class="wd-20p border-bottom-0">{{__('translate.general.email')}}</th>
+												<th class="wd-15p border-bottom-0">{{__('translate.general.phone')}}</th>
+												<th class="wd-10p border-bottom-0">{{__('translate.general.status')}}</th>
+												<th class="wd-15p border-bottom-0">{{__('translate.schools.school')}}</th>
+												<th class="wd-25p border-bottom-0">{{__('translate.general.action')}}</th>
 											</tr>
 										</thead>
 										<tbody>
 											@foreach($students as $index => $student)
-											<tr class="text-center">
+											<tr class="text-center row{{$student->id}}">
 												<td>{{$index+1}}</td>
 												<td>{{$student->name}}</td>
 												<td>{{$student->email}}</td>
 												<td>{{$student->mob}}</td>
 												<td>
 													@if($student->enabled == 1)
-													<label class="badge badge-success">Active</label>
+													<label class="badge badge-success">{{__('translate.general.active')}}</label>
 													@else
-													<label class="badge badge-danger">Inactive</label>
+													<label class="badge badge-danger">{{__('translate.general.inactive')}}</label>
 													@endif
 												</td>
 												<td>{{$student->school->name}}</td>
 												<td>
-													<a href="#" class="btn btn-sm btn-primary">
+													<a href="{{Route('students.show', $student->id)}}" class="btn btn-sm btn-primary">
 														<i class="las la-search"></i>
 													</a>
 													<a href="{{Route('students.edit', $student->id)}}" class="btn btn-sm btn-info">
 														<i class="las la-pen"></i>
 													</a>
-													<a data-target="#modaldemo1" data-toggle="modal" href="#" class="btn btn-sm btn-danger">
+													<a data-target="#modaldemo1" data-toggle="modal" class="btn btn-sm btn-danger trash" data-trash="{{$student->id}}">
 														<i class="las la-trash"></i>
 													</a>
 												</td>
@@ -122,31 +127,36 @@
 <script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
-
 <script>
 	$(document).ready(function() {
-		$('select[name="Section"]').on('change', function() {
-			var SectionId = $(this).val();
-			if (SectionId) {
+		$('.trash').click(function(){
+			$('.deleteStudent').val($(this).attr('data-trash'));
+		});
+		$('.deleteStudent').on('click', function() {
+			var student_id = $(this).val();
+			if (student_id) {
 				$.ajax({
-					url: "{{ URL::to('section') }}/" + SectionId,
-					type: "GET",
-					dataType: "json",
+					url: "students/" + student_id,
+					type: "Delete",
+					data:{
+						'_token':"{{csrf_token()}}",
+						'id':student_id
+					},
 					success: function(data) {
-						$('select[name="product"]').empty();
-						$.each(data, function(key, value) {
-							$('select[name="product"]').append('<option value="' +
-								value + '">' + value + '</option>');
-						});
+						$('#modaldemo1').modal('hide');
+						if(data.status == 'success'){
+							$('.row'+student_id).remove();
+							toastr.error(data.message);
+						}else{
+							toastr.error(data.message);
+						}
 					},
 				});
-
 			} else {
 				console.log('AJAX load did not work');
 			}
