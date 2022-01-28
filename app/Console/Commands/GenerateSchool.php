@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Events\GenerateschoolEvent;
+use App\Models\School;
 use Illuminate\Console\Command;
 
 class GenerateSchool extends Command
@@ -37,6 +39,9 @@ class GenerateSchool extends Command
      */
     public function handle()
     {
-        return 0;
+        $number = $this->argument('number');
+        School::factory($number)->create();
+        event(new GenerateschoolEvent($number));
+        $this->info('School has been created '.$number.' times successfully!');
     }
 }

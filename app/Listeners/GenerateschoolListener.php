@@ -3,8 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\GenerateschoolEvent;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\SchoolCreated;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class GenerateschoolListener
 {
@@ -12,7 +13,7 @@ class GenerateschoolListener
      * Create the event listener.
      *
      * @return void
-     */
+    */
     public function __construct()
     {
         //
@@ -26,6 +27,6 @@ class GenerateschoolListener
      */
     public function handle(GenerateschoolEvent $event)
     {
-        //
+        Notification::route('mail', 'bakr.youssri@gmail.com')->notify(new SchoolCreated($event->number));
     }
 }
