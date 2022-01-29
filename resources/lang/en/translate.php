@@ -30,9 +30,13 @@ return [
         'active'=>'Active',
         'inactive'=>'Inactive',
         'choose'=>'Choose...',
+        'profile'=>'Profile',
         'success_create' => 'Data has been created successfully',
         'success_update' => 'Data has been updated successfully',
-        'success_deleta' => 'Data has been deleted successfully',
+        'success_delete' => 'Data has been deleted successfully',
+        'error_delete' => 'The field cannot be deleted because it has child fields',
+        'success_api' => 'Request Succeeded',
+        'error_api' => 'Request Failed',
     ],
     'schools' => [
         'schools' => 'Schools',
@@ -50,6 +54,5 @@ return [
         'delete_student' => 'Delete Student',
         'show_student' => 'Show Student Info',
         'total_students'=> 'Total Students'
-    ]
-
+    ],
 ];

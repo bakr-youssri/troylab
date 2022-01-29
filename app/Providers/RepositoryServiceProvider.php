@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Api\SchoolController as ApiSchoolController;
+use App\Http\Controllers\Api\StudentController as ApiStudentController;
 use App\Repositories\BaseCrudRepositoryInterface;
 use App\Http\Controllers\SchoolController;
 use App\Repositories\Schools\SchoolRepository;
@@ -18,10 +20,13 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //Elquent
         $this->app->when(SchoolController::class)->needs(BaseCrudRepositoryInterface::class)->give(SchoolRepository::class);
         $this->app->when(StudentController::class)->needs(BaseCrudRepositoryInterface::class)->give(StudentRepository::class);
         
-        //$this->app->bind(StudentRepositoryInterface::class , StudentRepository::class);
+        //Api
+        $this->app->when(ApiSchoolController::class)->needs(BaseCrudRepositoryInterface::class)->give(SchoolRepository::class);
+        $this->app->when(ApiStudentController::class)->needs(BaseCrudRepositoryInterface::class)->give(StudentRepository::class);
     }
 
     /**

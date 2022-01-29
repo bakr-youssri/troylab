@@ -24,4 +24,7 @@ Route::group(['middleware' => ['auth','localeSessionRedirect', 'localizationRedi
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
     Route::Resource('schools', App\Http\Controllers\SchoolController::class);
     Route::Resource('students', App\Http\Controllers\StudentController::class);
+
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile']);
+    Route::patch('/update_user/{user}', [App\Http\Controllers\UserController::class, 'update']);
 });

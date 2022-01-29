@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-{{__('translate.students.show_students')}}
+{{__('translate.students.show_student')}}
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->

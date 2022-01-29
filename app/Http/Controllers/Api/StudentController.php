@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Repositories\BaseCrudRepositoryInterface;
+use App\Http\Resources\StudentResource;
 use App\Http\Requests\StudentRequest;
-use App\Models\School;
+use App\Http\Controllers\Controller;
+use App\Traits\CoreJsonTrait;
 use App\Models\Student;
-use Facade\FlareClient\Http\Response;
 use Throwable;
 
 class StudentController extends Controller
 {
+    use CoreJsonTrait;
+
     protected $student;
     public function __construct(BaseCrudRepositoryInterface $student)
     {
@@ -25,18 +28,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('Students.list', compact('students'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $schools = School::all();
-        return view('Students.store', compact('schools'));
+        return $this->ok(StudentResource::collection($students)->resolve());
     }
 
     /**
@@ -48,11 +40,10 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         try{
-            $this->student->store($request->validated());
-            toastr()->success(__('translate.general.success_create'));
-            return redirect('/students');
+            $student = $this->student->store($request->validated());
+            return $this->ok([new StudentResource($student)], null, __('translate.general.success_create'));
         }catch(Throwable $e){
-            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+            return $this->invalidRequest([$e->getMessage()]);
         }
     }
 
@@ -64,19 +55,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return view('Students.show', compact('student'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Student $student)
-    {
-        $schools = School::all();
-        return view('Students.edit', compact('student', 'schools'));
+        return $this->ok([new StudentResource($student)]);
     }
 
     /**
@@ -89,11 +68,10 @@ class StudentController extends Controller
     public function update(StudentRequest $request, Student $student)
     {
         try{
-            $this->student->update($request->validated(), $student);
-            toastr()->success(__('translate.general.success_update'));
-            return redirect('/students');
+            $student_update = $this->student->update($request->validated(), $student);
+            return $this->ok([new StudentResource($student_update)], null, __('translate.general.success_update'));
         }catch(Throwable $e){
-            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+            return $this->invalidRequest([$e->getMessage()]);
         }
     }
 
@@ -107,9 +85,9 @@ class StudentController extends Controller
     {
         try{
             $student->delete();
-            return Response()->json(['status'=>'success','message'=>__('translate.general.success_delete')]);
+            return $this->ok(null, null, __('translate.general.success_delete')); 
         }catch(Throwable $e){
-            return Response()->json(['status'=>'error','message'=>$e->getMessage()]);
+            return $this->invalidRequest([$e->getMessage()]);
         }
     }
 }

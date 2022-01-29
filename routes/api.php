@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+/*==================Guest==================*/
+Route::post('/register',[App\Http\Controllers\Api\AuthController::class, 'register']);
+Route::post('/login',[App\Http\Controllers\Api\AuthController::class, 'login']);
+/*==================Auth==================*/
+
+Route::group(['middleware' => 'api'], function (){
+    Route::Resource('schools', App\Http\Controllers\Api\SchoolController::class);
+    Route::Resource('students', App\Http\Controllers\Api\StudentController::class);
+
+    Route::get('/profile',[App\Http\Controllers\Api\UserController::class, 'profile']);
+    Route::patch('/update_user/{user}',[App\Http\Controllers\Api\UserController::class, 'update']);
 });
