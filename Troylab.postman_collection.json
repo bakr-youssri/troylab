@@ -1,0 +1,736 @@
+{
+	"info": {
+		"_postman_id": "20df26b7-cb5a-429b-8f25-54cd351626dc",
+		"name": "Troylab",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"troylab_token\",jsonData.response.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Bakr",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "bakr@troylab.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/register",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"troylab_token\",jsonData.response.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@troylab.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/login",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/profile",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Bakrrrrrrr",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "bakrrrrr@troylab.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/update_user/2",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"update_user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "School",
+			"item": [
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/schools",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"schools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/schools/1",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"schools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "School one",
+									"description": "Required, String",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is School One",
+									"description": "Required, String",
+									"type": "text"
+								},
+								{
+									"key": "enabled",
+									"value": "1",
+									"description": "Required, In(0, 1)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/schools",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"schools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "School Two",
+									"description": "Required, String",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is school two",
+									"description": "Required, String",
+									"type": "text"
+								},
+								{
+									"key": "enabled",
+									"value": "0",
+									"description": "Required, In(0, 1)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/schools/4",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"schools",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{amack_token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/schools/1",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"schools",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/students",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/students/2",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Bakr",
+									"description": "Required, String",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "bakr@troylab.com",
+									"description": "Required, Email Form",
+									"type": "text"
+								},
+								{
+									"key": "mob",
+									"value": "01122334455",
+									"description": "Requird, Numric",
+									"type": "text"
+								},
+								{
+									"key": "enabled",
+									"value": "1",
+									"description": "Required, In(0, 1)",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "1",
+									"description": "Required, Numric",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/students",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "_method",
+									"value": "PATCH",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Mohamed",
+									"description": "Required, String",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mohamed@troylab.com",
+									"description": "Required, Email Form",
+									"type": "text"
+								},
+								{
+									"key": "mob",
+									"value": "01122334466",
+									"description": "Requird, Numric",
+									"type": "text"
+								},
+								{
+									"key": "enabled",
+									"value": "0",
+									"description": "Requird, In(0, 1)",
+									"type": "text"
+								},
+								{
+									"key": "school_id",
+									"value": "2",
+									"description": "Requird, Numric",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/students/3001",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"3001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{troylab_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{troylab_base_url}}/api/students/3001",
+							"host": [
+								"{{troylab_base_url}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"3001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "troylab_base_url",
+			"value": ""
+		},
+		{
+			"key": "troylab_token",
+			"value": ""
+		}
+	]
+}
