@@ -6,7 +6,6 @@ use App\Repositories\BaseCrudRepositoryInterface;
 use App\Http\Requests\StudentRequest;
 use App\Models\School;
 use App\Models\Student;
-use Facade\FlareClient\Http\Response;
 use Throwable;
 
 class StudentController extends Controller

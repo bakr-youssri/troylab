@@ -16,12 +16,14 @@ class SchoolSeeder extends Seeder
     public function run()
     {
         if(!School::first() && !Student::first()){
-            //$school = School::factory(3)->has(Student::factory()->count(1000))->create();
-
-            $this->command->getOutput()->progressStart(1000);
-            School::factory(3)->has(Student::factory()->count(1000))->create();
-            $this->command->getOutput()->progressAdvance();
-            $this->command->getOutput()->progressFinish();
-        }
+            $this->command->getOutput()->progressStart(3);
+            School::factory(3)->create()->each(function($q){
+                Student::factory(1000)->create([
+                'school_id' => $q->id
+                ]);
+                $this->command->getOutput()->progressAdvance();
+            });
+           $this->command->getOutput()->progressFinish();
+       }
     }
 }

@@ -37,6 +37,8 @@ return [
         'error_delete' => 'The field cannot be deleted because it has child fields',
         'success_api' => 'Request Succeeded',
         'error_api' => 'Request Failed',
+        'recent' => 'Recent',
+        'oldest' => 'Oldest'
     ],
     'schools' => [
         'schools' => 'Schools',

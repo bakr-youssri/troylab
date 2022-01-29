@@ -4,14 +4,12 @@ namespace Tests\Feature;
 
 use App\Models\School;
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class SchoolTest extends TestCase
 { 
-    
-
     public function testStoreSchool(){
             School::factory()->count(3)->create();
             $this->assertTrue(true);
@@ -21,11 +19,11 @@ class SchoolTest extends TestCase
     {
         $school   = school::factory()->create();
         $student =  Student::factory()->create(['school_id' => $school->id]);
-        $this->assertTrue($school->students->contains($student));
+        $this->assertTrue($school->student->contains($student));
         
-        $this->assertEquals(1, $school->students->count());
+        $this->assertEquals(1, $school->student->count());
 
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $school->students);
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $school->student);
     }
 
     public function testIndexReturnsDataInValidFormatApi()
@@ -39,9 +37,11 @@ class SchoolTest extends TestCase
                 "response" => [
                     "data" => [
                         [
-                            'id' ,
-                            'title' ,
-                            'is_active'
+                            'id',
+                            'name',
+                            'description',
+                            'total_students',
+                            'enabled'
                         ],
                     ],
                 ]
@@ -51,8 +51,9 @@ class SchoolTest extends TestCase
 
     public function testSchoolsIsShownCorrectlyApi() {                
         $response = $this->json('GET','api/schools');
+
         //Write the response in laravel.log
-        \Log::info(1, [$response->getContent()]);
+        Log::info(1, [$response->getContent()]);
         $response->assertStatus(200);
         }
 }

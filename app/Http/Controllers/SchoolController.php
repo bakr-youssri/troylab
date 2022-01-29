@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\BaseCrudRepositoryInterface;
 use App\Http\Requests\SchoolRequest;
 use App\Models\School;
+use App\Models\Student;
 use Throwable;
 
 class SchoolController extends Controller
@@ -101,6 +102,9 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
         try{
+            if(Student::where('school_id', $school->id)->count() > 0){
+                return Response()->json(['status'=>'error','message'=>__('translate.general.error_delete')]);
+            }
             $school->delete();
             return Response()->json(['status'=>'success','message'=>__('translate.general.success_delete')]);
         }catch(Throwable $e){

@@ -37,6 +37,8 @@ return [
         'error_delete'=>'لا يمكن حذف هذا الحقل لوجود حقول تابعه له',
         'success_api' => 'نجح الطلب',
         'error_api' => 'فشل الطلب',
+        'recent' => 'الأحدث',
+        'oldest' => 'الأقدم'
     ],
     'schools' => [
         'schools' => 'المدارس',
