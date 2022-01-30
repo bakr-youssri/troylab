@@ -8,14 +8,14 @@
  - npm
 
 ## Getting started
-- exec the following into your terminal
-    1. cd into project directory
-    1. cp .env.example .env
-    1. composer install
-    1. php artisan key:generate
-    1. php artisan migrate --seed
-    1. php artisan test
-    1. php artisan serve  
+> exec the following into your terminal:
+    - cd into project directory
+    - cp .env.example .env
+    - composer install
+    - php artisan key:generate
+    - php artisan migrate --seed
+    - php artisan test
+    - php artisan serve  
 
 ## Authors
 * [Bakr Youssri](https://github.com/bakr-youssri)
