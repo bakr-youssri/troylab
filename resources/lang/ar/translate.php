@@ -26,6 +26,9 @@ return [
         'phone'=>'رقم المحمول',
         'status'=>'الحالة',
         'description'=>'الوصف',
+        'gender' => 'الجنس',
+        'level' => 'المستوى',
+        'dob' => 'تاريخ الميلاد',
         'action'=>'الأجراء',
         'active'=>'مفعل',
         'inactive'=>'غير مفعل',
@@ -38,7 +41,13 @@ return [
         'success_api' => 'نجح الطلب',
         'error_api' => 'فشل الطلب',
         'recent' => 'الأحدث',
-        'oldest' => 'الأقدم'
+        'oldest' => 'الأقدم',
+        'language'=>'اللغة',
+        'male' => 'ذكر',
+        'female' => 'أنثى',
+        'one' => 'الأول',
+        'two' => 'الثاني',
+        'three' => 'الثالث'
     ],
     'schools' => [
         'schools' => 'المدارس',

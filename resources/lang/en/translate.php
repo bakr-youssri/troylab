@@ -26,6 +26,9 @@ return [
         'phone'=>'Phone',
         'status'=>'Status',
         'description'=>'Description',
+        'gender' => 'Gender',
+        'level' => 'Level',
+        'dob' => 'Date Of Birth',
         'action'=>'Action',
         'active'=>'Active',
         'inactive'=>'Inactive',
@@ -38,7 +41,13 @@ return [
         'success_api' => 'Request Succeeded',
         'error_api' => 'Request Failed',
         'recent' => 'Recent',
-        'oldest' => 'Oldest'
+        'oldest' => 'Oldest',
+        'language'=>'Language',
+        'male' => 'Male',
+        'female' => 'Female',
+        'one' => 'One',
+        'two' => 'Two',
+        'three' => 'Three'
     ],
     'schools' => [
         'schools' => 'Schools',

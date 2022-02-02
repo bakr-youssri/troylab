@@ -74,7 +74,46 @@
                                 </select>
                             </div>
                         </div>
-                        
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputName" class="control-label">{{__('translate.general.gender')}}</label>
+                                <select class="form-control select2" name="gender">
+                                    @if ($student->gender == 'male')
+                                    <option value="male">{{__('translate.general.male')}}</option>
+                                    <option value="female">{{__('translate.general.female')}}</option>
+                                    @else
+                                    <option value="female">{{__('translate.general.female')}}</option>
+                                    <option value="male">{{__('translate.general.male')}}</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="inputName" class="control-label">{{__('translate.general.level')}}</label>
+                                <select class="form-control select2" name="level">
+                                    @if($student->level == 'one')
+                                    <option value="one">{{__('translate.general.one')}}</option>
+                                    <option value="two">{{__('translate.general.two')}}</option>
+                                    <option value="three">{{__('translate.general.three')}}</option>
+                                    @elseif($student->level == 'two')
+                                    <option value="two">{{__('translate.general.two')}}</option>
+                                    <option value="one">{{__('translate.general.one')}}</option>
+                                    <option value="three">{{__('translate.general.three')}}</option>
+                                    @else
+                                    <option value="three">{{__('translate.general.three')}}</option>
+                                    <option value="one">{{__('translate.general.one')}}</option>
+                                    <option value="two">{{__('translate.general.two')}}</option>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputName" class="control-label">{{__('translate.general.dob')}}</label>
+                                <input class="form-control" id="dateMask" placeholder="{{$student->dob}}" type="text" name="dob">
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="form-check col" style="padding-top:20px">
                                 <input type="checkbox" class="form-check-input" name="enabled" id="exampleCheck1" value="1" {{$student->enabled == 1 ? 'Checked': ''}}>

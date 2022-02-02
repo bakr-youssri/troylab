@@ -19,7 +19,7 @@ class SchoolSeeder extends Seeder
             $this->command->getOutput()->progressStart(3);
             School::factory(3)->create()->each(function($q){
                 Student::factory(1000)->create([
-                'school_id' => $q->id
+                    'school_id' => $q->id
                 ]);
                 $this->command->getOutput()->progressAdvance();
             });

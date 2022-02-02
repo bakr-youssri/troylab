@@ -18,6 +18,9 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('mob')->unique();
+            $table->string('level');
+            $table->date('dob');
+            $table->enum('gender',['male','female']);
             $table->boolean('enabled')->default(1);
             $table->foreignId('school_id')->constrained()->onDelete('RESTRICT');
             $table->timestamps();

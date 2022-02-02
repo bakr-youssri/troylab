@@ -65,9 +65,10 @@
 												<th class="wd-5p border-bottom-0">#</th>
 												<th class="wd-15p border-bottom-0">{{__('translate.general.name')}}</th>
 												<th class="wd-20p border-bottom-0">{{__('translate.general.email')}}</th>
-												<th class="wd-15p border-bottom-0">{{__('translate.general.phone')}}</th>
-												<th class="wd-10p border-bottom-0">{{__('translate.general.status')}}</th>
 												<th class="wd-15p border-bottom-0">{{__('translate.schools.school')}}</th>
+												<th class="wd-5p border-bottom-0">{{__('translate.general.level')}}</th>
+												<th class="wd-5p border-bottom-0">{{__('translate.general.gender')}}</th>
+												<th class="wd-10p border-bottom-0">{{__('translate.general.status')}}</th>
 												<th class="wd-25p border-bottom-0">{{__('translate.general.action')}}</th>
 											</tr>
 										</thead>
@@ -77,7 +78,9 @@
 												<td>{{$index+1}}</td>
 												<td>{{$student->name}}</td>
 												<td>{{$student->email}}</td>
-												<td>{{$student->mob}}</td>
+												<td>{{$student->school->name}}</td>
+												<td>{{$student->level}}</td>
+												<td>{{$student->gender}}</td>
 												<td>
 													@if($student->enabled == 1)
 													<label class="badge badge-success">{{__('translate.general.active')}}</label>
@@ -85,7 +88,6 @@
 													<label class="badge badge-danger">{{__('translate.general.inactive')}}</label>
 													@endif
 												</td>
-												<td>{{$student->school->name}}</td>
 												<td>
 													<a href="{{Route('students.show', $student->id)}}" class="btn btn-sm btn-primary">
 														<i class="las la-search"></i>

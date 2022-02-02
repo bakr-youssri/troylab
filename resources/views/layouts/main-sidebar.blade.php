@@ -22,17 +22,17 @@
             <li class="side-item side-item-category">{{__('translate.general.main')}}</li>
             <li class="slide">
                 <a class="side-menu__item" href="/">
-                    <span class="side-menu__label"> <i class="ti-settings ml-3"></i> {{__('translate.general.main')}}</span>
+                    <span class="side-menu__label"> <i class="ti-settings @if(App::getLocale() == 'en') mr-3 @else ml-3 @endif"></i> {{__('translate.general.main')}}</span>
                 </a>
             </li>
             <li class="slide">
                 <a class="side-menu__item" href="{{Route('schools.index')}}">
-                    <span class="side-menu__label"><i class="ti-home ml-3"></i> {{__('translate.schools.schools')}}</span>
+                    <span class="side-menu__label"><i class="ti-home @if(App::getLocale() == 'en') mr-3 @else ml-3 @endif"></i> {{__('translate.schools.schools')}}</span>
                 </a>
             </li>
             <li class="slide">
                 <a class="side-menu__item" href="{{Route('students.index')}}">
-                    <span class="side-menu__label"><i class="ti-user ml-3"></i> {{__('translate.students.students')}}</span>
+                    <span class="side-menu__label"><i class="ti-user @if(App::getLocale() == 'en') mr-3 @else ml-3 @endif"></i> {{__('translate.students.students')}}</span>
                 </a>
             </li>
         </ul>

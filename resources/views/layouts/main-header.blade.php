@@ -11,25 +11,21 @@
             </div>
         </div>
         <div class="main-header-right">
+            <div class="dropdown" style="margin-top:5px">
+                
+            </div>
             <ul class="nav">
                 <li class="">
                     <div class="dropdown  nav-itemd-none d-md-flex">
-                        <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <span class="avatar country-Flag mr-0 align-self-center bg-transparent"><img
-                                    src="{{ URL::asset('assets/img/flags/us_flag.jpg') }}" alt="img"></span>
-                            <div class="my-auto">
-                                <strong class="mr-2 ml-2 my-auto">English</strong>
-                            </div>
+                        <a href="#" class="d-flex nav-item nav-link pl-0 country-flag1" data-toggle="dropdown" aria-expanded="false">
+                            {{__('translate.general.language')}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
-                            <a href="#" class="dropdown-item d-flex">
-                                <span class="avatar  ml-3 align-self-center bg-transparent"><img
-                                        src="{{ URL::asset('assets/img/flags/spain_flag.jpg') }}" alt="img"></span>
-                                <div class="d-flex">
-                                    <span class="mt-2">Arabic</span>
-                                </div>
-                            </a>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </li>

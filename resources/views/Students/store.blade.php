@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
     <!--Internal  TelephoneInput css-->
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
+    <link href="{{URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css')}}" rel="stylesheet">
 @endsection
 @section('title')
     {{__('translate.students.add_student')}}
@@ -71,6 +73,31 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputName" class="control-label">{{__('translate.general.gender')}}</label>
+                                <select class="form-control select2" name="gender">
+                                    <option label="{{__('translate.general.choose')}}"></option>
+                                    <option value="male">{{__('translate.general.male')}}</option>
+                                    <option value="female">{{__('translate.general.female')}}</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="inputName" class="control-label">{{__('translate.general.level')}}</label>
+                                <select class="form-control select2" name="level">
+                                    <option label="{{__('translate.general.choose')}}"></option>
+                                    <option value="one">{{__('translate.general.one')}}</option>
+                                    <option value="two">{{__('translate.general.two')}}</option>
+                                    <option value="three">{{__('translate.general.three')}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputName" class="control-label">{{__('translate.general.dob')}}</label>
+                                <input class="form-control" id="dateMask" placeholder="MM/DD/YYYY" type="text" name="dob">
+                            </div>
+                        </div>
                         
                         <div class="row">
                             <div class="form-check col" style="padding-top:20px">
@@ -95,10 +122,15 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+    <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
     <!--Internal  Form-elements js-->
     <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
     <!--Internal  jquery.maskedinput js -->
     <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+    <!--Internal  jquery-simple-datetimepicker js -->
+    <script src="{{URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
+    <!-- Ionicons js -->
+    <script src="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
 @endsection
