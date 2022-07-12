@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 /*==================Guest==================*/
 Route::post('/register',[App\Http\Controllers\Api\AuthController::class, 'register']);
-Route::post('/login',[App\Http\Controllers\Api\AuthController::class, 'login']);
-/*==================Auth==================*/
+Route::post('/login',[App\Http\Controllers\Api\AuthController::class, 'login'])->name('login.api');
 
+/*==================Auth==================*/
 Route::group(['middleware' => 'api'], function (){
+    Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
     Route::Resource('schools', App\Http\Controllers\Api\SchoolController::class);
     Route::Resource('students', App\Http\Controllers\Api\StudentController::class);
 
